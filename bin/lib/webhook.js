@@ -1,7 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 exports.send = async (webhookUrl, payload = {}) => {
-    await fetch(webhookUrl, {
+    fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
