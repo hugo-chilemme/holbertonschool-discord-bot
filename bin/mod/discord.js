@@ -1,7 +1,4 @@
-const {
-	Client,
-	GatewayIntentBits, 
-} = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { DISCORD_TOKEN } = require('../core/discord.json');
 
 const intents = [
