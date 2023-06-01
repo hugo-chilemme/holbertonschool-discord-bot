@@ -73,7 +73,8 @@ const fetch = async () => {
             avatar_url: user.image_original,
             content: message,
         });
-        console.log(m);
+
+        
         messages_history[message_id] = {
             webhook_id: WEBHOOK_URI,
             message_id: messageDiscordId,
