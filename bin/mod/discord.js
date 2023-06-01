@@ -2,6 +2,7 @@ const {
 	Client,
 	GatewayIntentBits, 
 } = require('discord.js');
+const { DISCORD_TOKEN } = require('../core/discord.json');
 
 const intents = [
 	GatewayIntentBits.Guilds,
@@ -14,8 +15,9 @@ const intents = [
 	GatewayIntentBits.DirectMessages
 ];
 const client = new Client({intents});
-client.login("MTA0NTc4NjQzODQ3MTUzMjYzNA.G1Oc19.eN25TO8GsBgYl2IzRNvXxfnYg0s8QP9a6gxTP0");
-client.on("ready", () =>  console.log('authentified'));
+
+client.login(DISCORD_TOKEN);
+client.on("ready", () => console.log('authentified'));
 
 const sendMessage = async (channelId, content = {}) => {
     const channel = await client.channels.fetch(channelId);
