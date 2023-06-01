@@ -3,6 +3,7 @@ const { ANNOUNCEMENT_URI } = require('../core/discord.json');
 const store = require('data-store')({ path: process.cwd() + '/bin/core/slack.json' });
 const { slack } = require('../lib/slack');
 
+
 const fetch = async () => {
 
     if ( store.get('expires_in') < new Date().getTime() )
@@ -14,6 +15,8 @@ const fetch = async () => {
     const messages = await slack.api.conversations_history('C043TN0J3RD', 100);
     const messages_history = store.get('message_id');
 
+
+    
     let OnlineMessages = [];
     for (const m of messages) {
         OnlineMessages.push(m.client_msg_id);
@@ -25,10 +28,12 @@ const fetch = async () => {
             needDeleteEntries.push(client_msg_id);
         }
     }
-    needDeleteEntries.forEach(async ([key, value]) => {
-        await Webhook.remove(value.webhook_id, value.message_id);
-        delete messages_history[key];
-    });
+    for (const client_msg_id of needDeleteEntries) {
+        const m = messages_history[client_msg_id];
+        if (!m) return;
+        await Webhook.remove(m.webhook_id, m.message_id);
+        delete messages_history[client_msg_id];
+    };
     
        
     for (const m of messages)
@@ -74,7 +79,7 @@ const fetch = async () => {
             content: message,
         });
 
-        
+
         messages_history[message_id] = {
             webhook_id: WEBHOOK_URI,
             message_id: messageDiscordId,
