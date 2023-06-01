@@ -28,6 +28,7 @@ const fetch = async () => {
             needDeleteEntries.push(client_msg_id);
         }
     }
+    
     for (const client_msg_id of needDeleteEntries) {
         const m = messages_history[client_msg_id];
         if (!m) return;
@@ -78,7 +79,6 @@ const fetch = async () => {
             avatar_url: user.image_original,
             content: message,
         });
-
 
         messages_history[message_id] = {
             webhook_id: WEBHOOK_URI,

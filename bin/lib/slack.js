@@ -74,7 +74,7 @@ slack.api.oauth_refresh = async () => {
     const data = await slack.api.send_request('oauth_refresh');
 
     // if (store.get('expires_in') > new Date().getTime()) return store.get('access_token');
-
+    console.log(data);
     if (data.access_token && data.refresh_token)
     {
         store.set('access_token', data.access_token);

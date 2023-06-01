@@ -28,7 +28,13 @@ const edit = async (webhookUrl, messageId, payload = {}) => {
     }
 }
 
-
+const remove = async (webhookUrl, messageId, ) => {
+    const response = await fetch(`${webhookUrl}/messages/${messageId}?wait=true`, {
+        method: 'DELETE',
+    });
+    return response.ok;
+};
 
 exports.send = send;
 exports.edit = edit;
+exports.remove = remove;
