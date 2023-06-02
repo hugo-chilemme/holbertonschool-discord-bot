@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/translate": "^7.2.1",
-    "bing-translate-api": "^2.9.1",
+    "data-store": "^4.0.3",
     "discord.js": "^14.11.0",
+    "googleapis": "^118.0.0",
+    "jsonfile": "^6.1.0",
     "translate-google": "^1.5.0"
   }
 }

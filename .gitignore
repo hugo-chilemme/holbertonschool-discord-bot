@@ -1,3 +1,4 @@
 node_modules/
 bin/core/*.json
+bin/ext/
 package-lock.json

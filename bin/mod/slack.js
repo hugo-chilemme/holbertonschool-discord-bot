@@ -15,7 +15,6 @@ const fetch = async () => {
     const messages = await slack.api.conversations_history('C043TN0J3RD', 100);
     const messages_history = store.get('message_id');
 
-
     
     let OnlineMessages = [];
     for (const m of messages) {

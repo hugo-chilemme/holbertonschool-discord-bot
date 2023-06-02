@@ -1,32 +1,4 @@
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { DISCORD_TOKEN, CLIENT_ID, GUILD_ID } = require('../../core/discord.json');
 const translate = require('translate-google')
-const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
-
-const commands = [
-    {
-        name: 'Translate in English',
-        type: 3,
-        default_permission: false,
-    }
-];
-
-
-(async () => {
-    try {
-        console.log('Started refreshing application commands.');
-
-        await rest.put(
-            Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
-            { body: commands },
-        );
-
-        console.log('Successfully reloaded application commands.');
-    } catch (error) {
-        console.error(error);
-    }
-})();
 
 
 let cached = {};

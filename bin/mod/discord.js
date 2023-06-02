@@ -1,5 +1,8 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const { DISCORD_TOKEN } = require('../core/discord.json');
+const { DISCORD_TOKEN, CLIENT_ID, GUILD_ID } = require('../core/discord.json');
+const { REST } = require('@discordjs/rest');
+const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
+const { Routes } = require('discord-api-types/v9');
 
 const intents = [
     GatewayIntentBits.Guilds,
@@ -20,10 +23,47 @@ client.on('ready', () => {
 });
 
 require('../lib/functs/translate')(client);
+require('../lib/functs/bing-ai')(client);
 
 const sendMessage = async (channelId, content = {}) => {
     const channel = await client.channels.fetch(channelId);
     await channel.send(content);
 };
+
+const commands = [
+    {
+        name: 'Translate in English',
+        type: 3,
+        default_permission: false,
+        name_localizations: {
+            "fr": "Traduire en Anglais",
+        },
+    },
+    {
+        name: 'Ask Bing AI',
+        type: 3,
+        default_permission: false,
+        name_localizations: {
+            "fr": "Demander à Bing AI",
+        },
+    }
+];
+
+
+(async () => {
+    try {
+        console.log('Started refreshing application commands.');
+
+        await rest.put(
+            Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+            { body: commands },
+        );
+
+        console.log('Successfully reloaded application commands.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
+
 
 exports.sendMessage = sendMessage;
