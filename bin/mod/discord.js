@@ -20,10 +20,12 @@ const client = new Client({ intents });
 client.login(DISCORD_TOKEN);
 client.on('ready', () => {
     console.log('Authenticated');
+    
+    require('../lib/functs/translate')(client);
+    require('../lib/functs/ai')(client);
 });
 
-require('../lib/functs/translate')(client);
-require('../lib/functs/bing-ai')(client);
+
 
 const sendMessage = async (channelId, content = {}) => {
     const channel = await client.channels.fetch(channelId);
@@ -45,6 +47,14 @@ const commands = [
         default_permission: false,
         name_localizations: {
             "fr": "Demander à Bing AI",
+        },
+    },
+    {
+        name: 'Ask SFT-4',
+        type: 3,
+        default_permission: false,
+        name_localizations: {
+            "fr": "Demander à SFT-4",
         },
     }
 ];

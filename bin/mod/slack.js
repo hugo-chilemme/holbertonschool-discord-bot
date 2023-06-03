@@ -14,6 +14,7 @@ const fetch = async () => {
     const WEBHOOK_URI = ANNOUNCEMENT_URI;   
     const messages = await slack.api.conversations_history('C043TN0J3RD', 100);
     const messages_history = store.get('message_id');
+    const users_list = store.get('users');
 
     
     let OnlineMessages = [];
@@ -54,6 +55,14 @@ const fetch = async () => {
         message = message.replaceAll('&gt;', ' ').trim(); // Delete 'space' before ul
         message = message.replaceAll('::', ': :').trim(); // Separate two emojies
         
+        for (const [key, value] of Object.entries(users_list)) {
+            if (!value.discord) {
+                continue;
+            }
+            message = message.replace(`<@${value.id}>`, `<@${value.discord}>`)
+        }
+
+
         if (m.type !== "message") {
             continue;
         }

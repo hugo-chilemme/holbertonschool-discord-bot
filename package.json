@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bing-chat": "^0.2.3",
     "data-store": "^4.0.3",
     "discord.js": "^14.11.0",
     "googleapis": "^118.0.0",
