@@ -4,6 +4,7 @@ const { REST } = require('@discordjs/rest');
 const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
 const { Routes } = require('discord-api-types/v9');
 
+console.log(GatewayIntentBits)
 const intents = [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
@@ -12,7 +13,7 @@ const intents = [
     GatewayIntentBits.GuildInvites,
     GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.DirectMessages
+    GatewayIntentBits.DirectMessages,
 ];
 
 const client = new Client({ intents });
@@ -22,7 +23,8 @@ client.on('ready', () => {
     console.log('Authenticated');
     
     require('../lib/functs/translate')(client);
-    require('../lib/functs/ai')(client);
+    require('../lib/functs/ai').init(client);
+    require('../lib/functs/conversations')(client);
 });
 
 

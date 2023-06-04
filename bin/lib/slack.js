@@ -6,6 +6,7 @@ slack.api = {};
 
 slack.api.get = () => {
 
+    // https://api.slack.com/apps/A046XKRGS3S/oauth
     let api = {
         client_id: "4071953744069.4235671570128",
         client_secret: "5e3a5a89b28af6c195084daa333bee92",
@@ -72,8 +73,6 @@ slack.generate_url = (url, params) => {
 
 slack.api.oauth_refresh = async () => {
     const data = await slack.api.send_request('oauth_refresh');
-
-    // if (store.get('expires_in') > new Date().getTime()) return store.get('access_token');
 
     if (data.access_token && data.refresh_token)
     {
